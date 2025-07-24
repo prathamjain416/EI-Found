@@ -1,12 +1,12 @@
 [build]
-command = "npm run build"
-publish = "dist"
+  command = "npm run build"
+  outputDirectory = "dist"
 
 [dev]
-command = "vite"
-port = 8080
+  command = "npm run dev"
+  port = 8080
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+  source = "/(.*)"
+  destination = "/index.html"
+  statusCode = 200
