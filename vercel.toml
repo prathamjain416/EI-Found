@@ -4,7 +4,7 @@ publish = "dist"
 
 [dev]
 command = "vite"
-port = 5173
+port = 8080
 
 [[redirects]]
 from = "/*"
