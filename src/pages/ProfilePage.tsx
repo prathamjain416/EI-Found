@@ -60,6 +60,31 @@ const ProfilePage = () => {
 
   const isOwnProfile = !userId || userId === user?.id;
 
+  // Helper functions to format social media links
+  const formatWebsiteUrl = (url: string) => {
+    if (!url) return '';
+    return url.startsWith('http') ? url : `https://${url}`;
+  };
+
+  const formatInstagramUrl = (username: string) => {
+    if (!username) return '';
+    const cleanUsername = username.replace('@', '').replace('instagram.com/', '').replace('https://instagram.com/', '').replace('https://www.instagram.com/', '');
+    return `https://instagram.com/${cleanUsername}`;
+  };
+
+  const formatLinkedInUrl = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    if (url.startsWith('linkedin.com/')) return `https://${url}`;
+    return `https://linkedin.com/in/${url}`;
+  };
+
+  const formatTwitterUrl = (username: string) => {
+    if (!username) return '';
+    const cleanUsername = username.replace('@', '').replace('twitter.com/', '').replace('https://twitter.com/', '').replace('https://x.com/', '');
+    return `https://x.com/${cleanUsername}`;
+  };
+
   useEffect(() => {
     const fetchProfile = async () => {
       const targetUserId = userId || user?.id;
@@ -565,7 +590,20 @@ const ProfilePage = () => {
                       className="mt-2 text-sm sm:text-base"
                     />
                   ) : (
-                    <p className="mt-2 text-sm sm:text-base text-foreground break-all">{profileUser.website || 'Not specified'}</p>
+                    <div className="mt-2 text-sm sm:text-base">
+                      {profileUser.website ? (
+                        <a 
+                          href={formatWebsiteUrl(profileUser.website)} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-primary hover:underline break-all"
+                        >
+                          {profileUser.website}
+                        </a>
+                      ) : (
+                        <span className="text-foreground">Not specified</span>
+                      )}
+                    </div>
                   )}
                 </div>
 
@@ -583,7 +621,20 @@ const ProfilePage = () => {
                           className="mt-1 text-sm sm:text-base"
                         />
                       ) : (
-                        <p className="mt-1 text-sm sm:text-base text-foreground">{profileUser.instagram || 'Not specified'}</p>
+                        <div className="mt-1 text-sm sm:text-base">
+                          {profileUser.instagram ? (
+                            <a 
+                              href={formatInstagramUrl(profileUser.instagram)} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline"
+                            >
+                              {profileUser.instagram}
+                            </a>
+                          ) : (
+                            <span className="text-foreground">Not specified</span>
+                          )}
+                        </div>
                       )}
                     </div>
                     
@@ -597,7 +648,20 @@ const ProfilePage = () => {
                           className="mt-1 text-sm sm:text-base"
                         />
                       ) : (
-                        <p className="mt-1 text-sm sm:text-base text-foreground">{profileUser.linkedin || 'Not specified'}</p>
+                        <div className="mt-1 text-sm sm:text-base">
+                          {profileUser.linkedin ? (
+                            <a 
+                              href={formatLinkedInUrl(profileUser.linkedin)} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline"
+                            >
+                              {profileUser.linkedin}
+                            </a>
+                          ) : (
+                            <span className="text-foreground">Not specified</span>
+                          )}
+                        </div>
                       )}
                     </div>
                     
@@ -611,7 +675,20 @@ const ProfilePage = () => {
                           className="mt-1 text-sm sm:text-base"
                         />
                       ) : (
-                        <p className="mt-1 text-sm sm:text-base text-foreground">{profileUser.twitter || 'Not specified'}</p>
+                        <div className="mt-1 text-sm sm:text-base">
+                          {profileUser.twitter ? (
+                            <a 
+                              href={formatTwitterUrl(profileUser.twitter)} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline"
+                            >
+                              {profileUser.twitter}
+                            </a>
+                          ) : (
+                            <span className="text-foreground">Not specified</span>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>

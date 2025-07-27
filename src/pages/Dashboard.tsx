@@ -546,7 +546,7 @@ const Dashboard = () => {
                             </DropdownMenu>
                           )}
                         </div>
-                        <div className="text-foreground mb-3 break-words">
+                        <div className="text-foreground mb-3 break-words whitespace-pre-wrap">
                           {linkifyText(tweet.content)}
                         </div>
                         <div className="flex items-center space-x-6 text-muted-foreground">
